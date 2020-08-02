@@ -8,3 +8,11 @@ cc_test(
         "@gtest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "distribution_test",
+    srcs = ["distribution_test.cc"],
+    deps = [
+        "@gtest//:gtest_main",
+    ],
+)
