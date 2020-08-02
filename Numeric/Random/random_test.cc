@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
+
+#include <algorithm>
 #include <iostream>
 #include <random>
-#include <algorithm>
 #include <vector>
 
 using namespace std;
@@ -17,12 +18,12 @@ TEST(RandomTest, example1) {
   // [beg, end)
   std::uniform_real_distribution<double> dr(10, 20);
   for (int i = 0; i < 8; i++) {
-    cout << dr(dre) << " " ;
+    cout << dr(dre) << " ";
   }
   cout << std::endl;
 
-  //shuffle
-  std::vector<int> v {1, 2, 3, 4, 5, 6, 7, 8, 9};
+  // shuffle
+  std::vector<int> v{1, 2, 3, 4, 5, 6, 7, 8, 9};
   std::shuffle(v.begin(), v.end(), dre);
   for (auto e : v) {
     cout << e << " ";
@@ -34,5 +35,4 @@ TEST(RandomTest, example1) {
   std::default_random_engine dre2;
   cout << di(dre1) << std::endl;
   cout << di(dre2) << std::endl;
-  
 }
