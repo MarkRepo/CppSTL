@@ -8,6 +8,8 @@ using namespace std;
 class MyType {
  public:
   MyType() { cout << "ctor for MyType" << endl; }
+  MyType(const MyType& val) { cout << "copy ctor for MyType" << endl; }
+  ~MyType() { cout << "dtor for MyType" << endl; }
 };
 
 //自定义allocator必须提供以下内容
@@ -28,6 +30,9 @@ class MyAlloc {
   }
   // 5. 成员函数deallocate，用来释放不再需要的内存
   void deallocate(T* p, std::size_t num) { ::operator delete(p); }
+
+  void construct(T* p, const T& val) { new (p) T(val); }
+  void destroy(T* p) { p->~T(); }
 };
 
 // 6. ==
@@ -58,11 +63,11 @@ class Vector {
   explicit Vector(size_t num, const T& val = T(), const Allocator& a = Allocator()) : alloc(a) {
     sizeElems = numElems = num;
     elems = alloc.allocate(num);
-    /*
+
     for (size_t i = 0; i < sizeElems; i++) {
       alloc.construct(&elems[i], val);
-    }*/
-    uninitialized_fill_n(elems, num, val);
+    }
+    // uninitialized_fill_n(elems, num, val);
   }
   template <typename InputIterator>
   Vector(InputIterator beg, InputIterator end, const Allocator& = Allocator());
@@ -76,7 +81,9 @@ class Vector {
     // allocate new memory for size elements
     T* newmem = alloc.allocate(size);
     // copy old elements into new memory
+    cout << "before copy" << endl;
     uninitialized_copy(elems, elems + numElems, newmem);
+    cout << "after copy" << endl;
     // destroy old elements
     for (size_t i = 0; i < numElems; ++i) {
       alloc.destroy(&elems[i]);
@@ -92,9 +99,10 @@ class Vector {
 }  // namespace MyStd
 
 TEST(AllocTest, MyAlloc) {
-  int val = 10;
+  MyType a;
   size_t num = 10;
-  MyStd::Vector<int, MyAlloc<int>> myVec(num, val);
+  MyStd::Vector<MyType, MyAlloc<MyType>> myVec(num, a);
+  myVec.reserve(15);
 }
 
 TEST(AllocTest, raw_storage_iterator) {

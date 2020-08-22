@@ -2,3 +2,4 @@ bazel-bin
 bazel-CppSTL
 bazel-out
 bazel-testlogs
+.vscode

@@ -10,7 +10,7 @@ TEST(RegexTest, regex_match_search) {
   auto out = [](bool b) { cout << (b ? "found" : "not found") << endl; };
   const string data = "<tag>value</tag>";
   const string notfound_data = "<tag>value</notfound>";
-  const string s = "<.*>.*</.*>";              // ‘.’ 意指处newline 即\n 之外任意字符
+  const string s = "<.*>.*</.*>";              // ‘.’ 意指除newline 即\n 之外任意字符
   const string group_s = "<(.*)>.*</\\1>";     // using group
   const string grep_s = "<\\(.*\\)>.*</\\1>";  // using grep syntax
 
