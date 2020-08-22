@@ -26,7 +26,7 @@ void MapTestOp(const pair<const T, T>& t, std::initializer_list<std::pair<const 
   PrintElem(m1, "m1 after init with initlist");
   // 2. key_comp, value_comp
   auto key_comp = m1.key_comp();
-  auto value_comp = m1.value_comp();
+  m1.value_comp();
   ASSERT_EQ(key_comp, comp);
   // 3. count, find, lower_bound, upper_bound, equal_range, 针对key，与set相同
   // 4. insert, emplace, erase 均与set相同，除了value是pair
@@ -64,7 +64,7 @@ void MapTestOp(const pair<const T, T>& t, std::initializer_list<std::pair<const 
   m1.clear();
   // access
   m1[t.first] = t.second;  // only for nonconst map
-  auto v = m1.at(t.first);
+  m1.at(t.first);
 }
 
 TEST(MapTest, op) {
