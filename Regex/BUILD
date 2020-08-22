@@ -4,7 +4,7 @@ cc_test(
     name = "regex_test",
     srcs = ["regex_test.cc"],
     deps = [
-        ":output",
+        "@gtest",
         "@gtest//:gtest_main",
     ],
 )
