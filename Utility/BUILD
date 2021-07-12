@@ -17,3 +17,12 @@ cc_test(
         "@gtest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "cpp_model_test",
+    srcs = ["cpp_model_test.cc"],
+    deps = [
+        "@gtest",
+        "@gtest//:gtest_main",
+    ],
+)

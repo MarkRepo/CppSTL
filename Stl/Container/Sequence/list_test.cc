@@ -57,7 +57,7 @@ void ListTestOp(const T& t, const std::initializer_list<T>& initlist) {
   l3.push_back(t);
   l2.splice(l2.end(), l3, l3.begin());
   PrintElem(l2, "l2 after splice");
-  // c.splice(pos, c2, c2beg, c2end)， 将c2中[c2beg, c2end)所有三原色移动到c中pos之前
+  // c.splice(pos, c2, c2beg, c2end)， 将c2中[c2beg, c2end)所有元素移动到c中pos之前
   l3.assign(3, t);
   l2.splice(l2.end(), l3, l3.begin(), l3.end());
   PrintElem(l2, "l2 after splice");

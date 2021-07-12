@@ -8,8 +8,8 @@ AccessModifierOffset: -1
 AllowAllParametersOfDeclarationOnNextLine: false
 BinPackParameters: false
 BinPackArguments: false
-ColumnLimit: 100
 UseTab: Never
+ColumnLimit: 120
 PointerAlignment: Left
 
 #---

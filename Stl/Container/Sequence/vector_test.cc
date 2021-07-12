@@ -32,7 +32,7 @@ void TestVectorCap(const T& t) {
   cout << "after swap, v2.capacity: " << v2.capacity() << endl;
 }
 
-// 除Str/Container/Common:op_test 外的vector 操作
+// 除Stl/Container/Common:op_test 外的vector 操作
 template <typename T>
 void TestVectorOp(const T& t, const std::initializer_list<T>& initlist = {}) {
   cout << endl << endl << "<<<<<<< enter TestVectorOp initlist: ";

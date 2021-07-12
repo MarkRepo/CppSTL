@@ -119,3 +119,61 @@ TEST(HashTest, test1) {
   intmap.insert({15, 15});
   PrintHashTableState(intmap, "intmap after insert");
 }
+
+// 最长回文子串的一种解法，但是耗时太长了，没有通过leetcode 测试
+struct Indexs {
+  size_t beg;
+  size_t end;
+};
+
+class IndexsHash {
+ public:
+  std::size_t operator()(const Indexs& c) const { return hash_val(c.beg, c.end); }
+};
+
+class IndexsCmp {
+ public:
+  bool operator()(const Indexs& c1, const Indexs& c2) const {
+    return c1.beg == c2.beg && c1.end == c2.end;
+  }
+};
+
+class Solution {
+ private:
+  std::unordered_map<Indexs, bool, IndexsHash, IndexsCmp> iMap;
+
+ public:
+  bool isPalindrome(const std::string& s, size_t beg, size_t end) {
+    Indexs i{beg, end};
+    if (iMap.find(i) != iMap.end()) return iMap[i];
+    for (; beg < end; ++beg, --end) {
+      if (s[beg] != s[end]) {
+        iMap[i] = false;
+        return false;
+      }
+    }
+    iMap[i] = true;
+    return true;
+  }
+
+  std::string longestPalindrome(const std::string& s, size_t beg, size_t end) {
+    if (beg >= end) return s.substr(beg, 1);
+    if (isPalindrome(s, beg, end)) return s.substr(beg, end - beg + 1);
+    std::string s1 = longestPalindrome(s, beg + 1, end);
+    std::string s2 = longestPalindrome(s, beg, end - 1);
+    if (s1.size() > s2.size())
+      return s1;
+    else
+      return s2;
+  }
+
+  std::string longestPalindrome(std::string s) {
+    if (s.empty()) return "";
+    return longestPalindrome(s, 0, s.size() - 1);
+  }
+};
+
+TEST(PalindTest, palind) {
+  Solution s;
+  std::cout << s.longestPalindrome("abbcccbbbcaaccbababcbcabca") << std::endl;
+}

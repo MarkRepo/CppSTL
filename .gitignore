@@ -3,3 +3,12 @@ bazel-CppSTL
 bazel-out
 bazel-testlogs
 .vscode
+.ccls-cache
+.editorconfig
+charset.out
+cmpdb.sh
+compile_commands.json
+**/*.o
+test.txt
+
+

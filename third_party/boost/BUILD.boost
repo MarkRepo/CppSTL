@@ -1,0 +1,13 @@
+cc_library(
+    name = "libboost",
+    #hdrs = glob(["boost_1_76_0/boost/**/*.hpp", "boost_1_76_0/boost/**/**/*.hpp", "boost_1_76_0/boost/**/**/**/*.hpp"]),
+    hdrs = glob([
+        "boost_1_76_0/boost/**/*.hpp", 
+        "boost_1_76_0/boost/**/**/*.hpp", 
+        "boost_1_76_0/boost/**/**/**/*.hpp", 
+        "boost_1_76_0/boost/**/*.ipp", 
+        "boost_1_76_0/boost/**/*.h"],
+        ),
+    includes = ["boost_1_76_0"],
+    visibility = ["//visibility:public"],
+)
